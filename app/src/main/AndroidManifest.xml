@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vi.learning.hellokotlin">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,8 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.AnkoFeatureActivity"/>
-        <activity android:name=".view.DescriptionActivity"/>
-        <activity android:name=".view.FootballClubActivity"/>
+        <activity android:name=".view.submission1.DescriptionActivity"/>
+        <activity android:name=".view.submission1.FootballClubActivity"/>
+        <activity android:name=".view.footballclubfromdb.FootballclubFromDbActivity"/>
     </application>
 
 </manifest>

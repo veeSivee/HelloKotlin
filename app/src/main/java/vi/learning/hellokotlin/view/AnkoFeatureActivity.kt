@@ -8,6 +8,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import vi.learning.hellokotlin.R
+import vi.learning.hellokotlin.view.submission1.DescriptionActivity
 
 /**
  * Created by taufiqotulfaidah on 10/23/18.

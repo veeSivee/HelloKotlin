@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import vi.learning.hellokotlin.R
+import vi.learning.hellokotlin.view.footballclubfromdb.FootballclubFromDbActivity
+import vi.learning.hellokotlin.view.submission1.FootballClubActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +48,15 @@ class MainActivity : AppCompatActivity() {
                     backgroundColor = ContextCompat.getColor(context, R.color.colorAccent)
                     onClick {
                         startActivity<FootballClubActivity>()
+                    }
+                }.lparams(width = matchParent){
+                    topMargin = dip(5)
+                }
+
+                button("Football Club from DB") {
+                    backgroundColor = ContextCompat.getColor(context, R.color.colorAccent)
+                    onClick {
+                        startActivity<FootballclubFromDbActivity>()
                     }
                 }.lparams(width = matchParent){
                     topMargin = dip(5)

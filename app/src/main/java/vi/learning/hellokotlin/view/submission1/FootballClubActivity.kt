@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view
+package vi.learning.hellokotlin.view.submission1
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
