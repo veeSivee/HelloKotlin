@@ -1,6 +1,7 @@
 package vi.learning.hellokotlin.model.footballmatch
 
 import com.google.gson.annotations.SerializedName
+import java.text.SimpleDateFormat
 
 /**
  * Created by taufiqotulfaidah on 10/31/18.
@@ -66,5 +67,11 @@ class Event (
         var homeSubstitutes: String? = null,
 
         @SerializedName("strAwayLineupSubstitutes")
-        var awaySubstitutes: String? = null
-)
+        var awaySubstitutes: String? = null) {
+
+    fun getDisplayDate() : String {
+        val date = SimpleDateFormat("yyyy-MM-dd").parse(dateEvent)
+        val format = SimpleDateFormat("EEE, dd MMM yyyy")
+        return format.format(date)
+    }
+}

@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view
+package vi.learning.hellokotlin.view.ankofeature
 
 import android.graphics.Color
 import android.os.Bundle

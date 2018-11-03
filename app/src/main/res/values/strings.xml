@@ -83,4 +83,5 @@
     <string name="tab_text_2">Next Match</string>
     <string name="football_match_schedule">Football Match Schedule</string>
     <string name="list_football_from_api">List of Football From API</string>
+    <string name="match_detail">Match Detail</string>
 </resources>

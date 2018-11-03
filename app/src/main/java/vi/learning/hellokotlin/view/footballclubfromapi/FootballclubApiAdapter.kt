@@ -60,7 +60,6 @@ class TeamViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bindItem(teams: Team) {
         Picasso.get().load(teams.teamBadge).into(teamBadge)
-        //Glide.with(itemView.context).load(teams.teamBadge).into(teamBadge)
         teamName.text = teams.teamName
     }
 }

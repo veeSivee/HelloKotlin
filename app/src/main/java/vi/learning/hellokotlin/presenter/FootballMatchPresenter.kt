@@ -49,12 +49,7 @@ class FootballMatchPresenter (private val view: FootballMatchScheduleView,
         if (data.size > 0) return
 
         var index : Int = idLeague.indexOf(id)
-
         var league = strLeague[index]
-
-        /*if (id.equals("4328")) {
-            league = "English Premier League"
-        }*/
 
         doAsync {
             val dataTeam = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeams(league)),
@@ -70,7 +65,6 @@ class FootballMatchPresenter (private val view: FootballMatchScheduleView,
                 return team.teamBadge
             }
         }
-
         return ""
     }
 }

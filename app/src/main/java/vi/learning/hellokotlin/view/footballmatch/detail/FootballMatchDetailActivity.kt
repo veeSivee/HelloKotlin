@@ -2,10 +2,10 @@ package vi.learning.hellokotlin.view.footballmatch.detail
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.View
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_football_match_detail.*
 import vi.learning.hellokotlin.ConstantValue
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.data.ApiRepository
@@ -15,27 +15,6 @@ import vi.learning.hellokotlin.presenter.FootballMatchDetailPresenter
 class FootballMatchDetailActivity : AppCompatActivity(), FootballMatchDetailView {
 
     private lateinit var presenter: FootballMatchDetailPresenter
-    private lateinit var tvDate: TextView
-    private lateinit var tvHomeScore: TextView
-    private lateinit var tvAwayScore: TextView
-    private lateinit var tvHomeTeamName: TextView
-    private lateinit var tvAwayTeamName: TextView
-    private lateinit var tvHomeGoal: TextView
-    private lateinit var tvAwayGoal: TextView
-    private lateinit var tvHomeShot: TextView
-    private lateinit var tvAwayShot: TextView
-    private lateinit var tvHomeGoalKeeper: TextView
-    private lateinit var tvAwayGoalKeeper: TextView
-    private lateinit var tvHomeDefense: TextView
-    private lateinit var tvAwayDefense: TextView
-    private lateinit var tvHomeMidfield: TextView
-    private lateinit var tvAwayMidfield: TextView
-    private lateinit var tvHomeForward: TextView
-    private lateinit var tvAwayForward: TextView
-    private lateinit var tvHomeSubstitutes: TextView
-    private lateinit var tvAwaySubstitutes: TextView
-    private lateinit var ivHomeTeam: ImageView
-    private lateinit var ivAwayTeam: ImageView
 
     private lateinit var homeBadge: String
     private lateinit var awayBadge: String
@@ -43,34 +22,9 @@ class FootballMatchDetailActivity : AppCompatActivity(), FootballMatchDetailView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_football_match_detail)
-        setTitle("Match Detail")
-        initView()
+        setTitle(getString(R.string.match_detail))
         initPresenter()
         getData()
-    }
-
-    private fun initView() {
-        tvDate = findViewById(R.id.tv_date_match)
-        tvHomeScore = findViewById(R.id.tv_home_score)
-        tvAwayScore = findViewById(R.id.tv_away_score)
-        tvHomeTeamName = findViewById(R.id.tv_home_team_name)
-        tvAwayTeamName = findViewById(R.id.tv_away_team_name)
-        tvHomeGoal = findViewById(R.id.tv_home_goals)
-        tvAwayGoal = findViewById(R.id.tv_away_goals)
-        tvHomeShot = findViewById(R.id.tv_home_shots)
-        tvAwayShot = findViewById(R.id.tv_away_shots)
-        tvHomeGoalKeeper = findViewById(R.id.tv_home_goal_keeper)
-        tvAwayGoalKeeper = findViewById(R.id.tv_away_goals_keeper)
-        tvHomeDefense = findViewById(R.id.tv_home_defense)
-        tvAwayDefense = findViewById(R.id.tv_away_defense)
-        tvHomeMidfield = findViewById(R.id.tv_home_midfield)
-        tvAwayMidfield = findViewById(R.id.tv_away_midfield)
-        tvHomeForward = findViewById(R.id.tv_home_forward)
-        tvAwayForward = findViewById(R.id.tv_away_forward)
-        tvHomeSubstitutes = findViewById(R.id.tv_home_substitutes)
-        tvAwaySubstitutes = findViewById(R.id.tv_away_substitutes)
-        ivHomeTeam = findViewById(R.id.iv_home_team)
-        ivAwayTeam = findViewById(R.id.iv_away_team)
     }
 
     private fun initPresenter() {
@@ -87,42 +41,44 @@ class FootballMatchDetailActivity : AppCompatActivity(), FootballMatchDetailView
     }
 
     override fun showLoading() {
+        pb_match_detail.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
+        pb_match_detail.visibility = View.GONE
     }
 
     override fun showMatchList(event: Event) {
-        tvDate.text = event.dateEvent
+        tv_date_match.text = event.getDisplayDate()
         if (event.homeScore > 0 || event.awayScore > 0) {
-            tvHomeScore.text = event.homeScore.toString()
-            tvAwayScore.text = event.awayScore.toString()
+            tv_home_score.text = event.homeScore.toString()
+            tv_away_score.text = event.awayScore.toString()
         }
-        tvHomeTeamName.text = event.homeTeam
-        tvAwayTeamName.text = event.awayTeam
+        tv_home_team_name.text = event.homeTeam
+        tv_away_team_name.text = event.awayTeam
         if (event.homeGoalDetails != null && event.awayGoalDetails != null ) {
-            tvHomeGoal.text = event.homeGoalDetails.toString()
-            tvAwayGoal.text = event.awayGoalDetails.toString()
+            tv_home_goals.text = event.homeGoalDetails.toString()
+            tv_away_goals.text = event.awayGoalDetails.toString()
         }
-        tvHomeShot.text= event.homeShot
-        tvAwayShot.text = event.awayShot
-        tvHomeGoalKeeper.text = event.homeGoalKeeper
-        tvAwayGoalKeeper.text = event.awayGoalKeeper
-        tvHomeDefense.text = event.homeDefense
-        tvAwayDefense.text = event.awayDefense
-        tvHomeMidfield.text = event.homeMidfield
-        tvAwayMidfield.text = event.awayMidfield
-        tvHomeForward.text = event.homeForward
-        tvAwayForward.text = event.awayForward
-        tvHomeSubstitutes.text = event.homeSubstitutes
-        tvAwaySubstitutes.text = event.awaySubstitutes
+        tv_home_shots.text= event.homeShot
+        tv_away_shots.text = event.awayShot
+        tv_home_goal_keeper.text = event.homeGoalKeeper
+        tv_away_goals_keeper.text = event.awayGoalKeeper
+        tv_home_defense.text = event.homeDefense
+        tv_away_defense.text = event.awayDefense
+        tv_home_midfield.text = event.homeMidfield
+        tv_away_midfield.text = event.awayMidfield
+        tv_home_forward.text = event.homeForward
+        tv_away_forward.text = event.awayForward
+        tv_home_substitutes.text = event.homeSubstitutes
+        tv_away_substitutes.text = event.awaySubstitutes
 
         if (homeBadge.isNotEmpty()) {
-            Picasso.get().load(homeBadge).into(ivHomeTeam)
+            Picasso.get().load(homeBadge).into(iv_home_team)
         }
 
         if (awayBadge.isNotEmpty()) {
-            Picasso.get().load(awayBadge).into(ivAwayTeam)
+            Picasso.get().load(awayBadge).into(iv_away_team)
         }
     }
 

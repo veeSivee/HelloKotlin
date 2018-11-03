@@ -61,7 +61,7 @@ class EventUI: AnkoComponent<ViewGroup> {
                         id = R.id.team_home
                         textSize = 16f
                     }.lparams{
-                        leftMargin = dip(5)
+                        leftMargin = dip(15)
                         rightMargin = dip(5)
                         bottomMargin = dip(10)
                         leftOf(R.id.team_home_score)
@@ -108,7 +108,7 @@ class EventUI: AnkoComponent<ViewGroup> {
                         textSize = 16f
                     }.lparams{
                         leftMargin = dip(5)
-                        rightMargin = dip(5)
+                        rightMargin = dip(15)
                         bottomMargin = dip(10)
                         rightOf(R.id.team_away_score)
                         centerInParent()
@@ -121,6 +121,8 @@ class EventUI: AnkoComponent<ViewGroup> {
                 }.lparams{
                     width = matchParent
                     height = dip(1)
+                    leftMargin = dip(15)
+                    rightMargin = dip(15)
                 }
             }
         }
@@ -138,7 +140,7 @@ class EventViewHolder(view: View, val listener: EventClickListener) : RecyclerVi
     private val llEvent: LinearLayout = view.find(R.id.ll_event)
 
     fun bindItem(event: Event) {
-        eventTime.text = event.dateEvent
+        eventTime.text = event.getDisplayDate()
         teamHome.text = event.homeTeam
         teamAway.text = event.awayTeam
 

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import vi.learning.hellokotlin.R
+import vi.learning.hellokotlin.view.ankofeature.AnkoFeatureActivity
 import vi.learning.hellokotlin.view.footballclubfromapi.FootballclubFromApiActivity
 import vi.learning.hellokotlin.view.footballclublist.FootballClubActivity
 import vi.learning.hellokotlin.view.footballmatch.footballmatchschedule.FootballMatchScheduleActivity
