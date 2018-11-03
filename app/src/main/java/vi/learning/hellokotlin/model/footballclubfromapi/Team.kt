@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.model.footballclubfromdb
+package vi.learning.hellokotlin.model.footballclubfromapi
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.model.footballclubfromdb
+package vi.learning.hellokotlin.model.footballclubfromapi
 
 /**
  * Created by taufiqotulfaidah on 10/30/18.

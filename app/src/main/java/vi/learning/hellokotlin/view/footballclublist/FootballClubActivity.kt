@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.submission1
+package vi.learning.hellokotlin.view.footballclublist
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

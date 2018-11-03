@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.footballclubfromdb
+package vi.learning.hellokotlin.view.footballclubfromapi
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -9,12 +9,12 @@ import android.widget.TextView
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import vi.learning.hellokotlin.R
-import vi.learning.hellokotlin.model.footballclubfromdb.Team
+import vi.learning.hellokotlin.model.footballclubfromapi.Team
 
 /**
  * Created by taufiqotulfaidah on 10/30/18.
  */
-class FootballclubDbAdapter (private val teams: List<Team>) : RecyclerView.Adapter<TeamViewHolder>() {
+class FootballclubApiAdapter(private val teams: List<Team>) : RecyclerView.Adapter<TeamViewHolder>() {
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         holder.bindItem(teams[position])

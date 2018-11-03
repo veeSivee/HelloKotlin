@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vi.learning.hellokotlin">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,10 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.AnkoFeatureActivity"/>
-        <activity android:name=".view.submission1.DescriptionActivity"/>
-        <activity android:name=".view.submission1.FootballClubActivity"/>
-        <activity android:name=".view.footballclubfromdb.FootballclubFromDbActivity"/>
+        <activity android:name=".view.AnkoFeatureActivity" />
+        <activity android:name=".view.footballclublist.DescriptionActivity" />
+        <activity android:name=".view.footballclublist.FootballClubActivity" />
+        <activity android:name=".view.footballclubfromapi.FootballclubFromApiActivity" />
+        <activity
+            android:name=".view.footballmatch.footballmatchschedule.FootballMatchScheduleActivity"
+            android:label="@string/title_activity_football_match_schedule"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.footballmatch.detail.FootballMatchDetailActivity"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.footballclubfromdb
+package vi.learning.hellokotlin.view.footballclubfromapi
 
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
@@ -12,19 +12,19 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import vi.learning.hellokotlin.presenter.FootballClubDbPresenter
+import vi.learning.hellokotlin.presenter.FootballClubApiPresenter
 import vi.learning.hellokotlin.R
-import vi.learning.hellokotlin.data.footballclubfromdb.ApiRepository
-import vi.learning.hellokotlin.model.footballclubfromdb.Team
+import vi.learning.hellokotlin.data.ApiRepository
+import vi.learning.hellokotlin.model.footballclubfromapi.Team
 
 /**
  * Created by taufiqotulfaidah on 10/30/18.
  */
-class FootballclubFromDbActivity : AppCompatActivity(), FootballClubDbView {
+class FootballclubFromApiActivity : AppCompatActivity(), FootballClubApiView {
 
     private var teams: MutableList<Team> = mutableListOf()
-    private lateinit var presenter: FootballClubDbPresenter
-    private lateinit var adapter: FootballclubDbAdapter
+    private lateinit var presenter: FootballClubApiPresenter
+    private lateinit var adapter: FootballclubApiAdapter
     private lateinit var leagueName: String
 
     private lateinit var listTeam: RecyclerView
@@ -34,7 +34,7 @@ class FootballclubFromDbActivity : AppCompatActivity(), FootballClubDbView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        title = "List of Football From DB"
+        title = getString(R.string.list_football_from_api)
 
         initLayout()
     }
@@ -90,12 +90,12 @@ class FootballclubFromDbActivity : AppCompatActivity(), FootballClubDbView {
     }
 
     private fun initAdapter() {
-        adapter = FootballclubDbAdapter(teams)
+        adapter = FootballclubApiAdapter(teams)
         listTeam.adapter = adapter
 
         val request = ApiRepository()
         val gson = Gson()
-        presenter = FootballClubDbPresenter(this, request, gson)
+        presenter = FootballClubApiPresenter(this, request, gson)
     }
 
     override fun showLoading() {

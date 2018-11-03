@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.submission1
+package vi.learning.hellokotlin.view.footballclublist
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

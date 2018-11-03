@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.data.footballclubfromdb
+package vi.learning.hellokotlin.data
 
 import java.net.URL
 
