@@ -1,115 +1,54 @@
 package vi.learning.hellokotlin.view.footballclubfromapi
 
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.widget.*
-import com.google.gson.Gson
-import org.jetbrains.anko.*
-import org.jetbrains.anko.recyclerview.v7.recyclerView
-import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.swipeRefreshLayout
-import vi.learning.hellokotlin.presenter.FootballClubApiPresenter
+import kotlinx.android.synthetic.main.activity_football_club.*
 import vi.learning.hellokotlin.R
-import vi.learning.hellokotlin.data.ApiRepository
-import vi.learning.hellokotlin.model.footballclubfromapi.Team
+import vi.learning.hellokotlin.view.footballclubfromapi.favorite.FavoriteTeamsFragment
 
 /**
  * Created by taufiqotulfaidah on 10/30/18.
  */
-class FootballclubFromApiActivity : AppCompatActivity(), FootballClubApiView {
-
-    private var teams: MutableList<Team> = mutableListOf()
-    private lateinit var presenter: FootballClubApiPresenter
-    private lateinit var adapter: FootballclubApiAdapter
-    private lateinit var leagueName: String
-
-    private lateinit var listTeam: RecyclerView
-    private lateinit var progressBar: ProgressBar
-    private lateinit var swipeRefresh: SwipeRefreshLayout
-    private lateinit var spinner: Spinner
+class FootballclubFromApiActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_football_club)
         title = getString(R.string.list_football_from_api)
 
-        initLayout()
+        initView(savedInstanceState)
     }
 
-    private fun initLayout() {
-        linearLayout {
-            lparams(width = matchParent, height = wrapContent)
-            orientation = LinearLayout.VERTICAL
-            topPadding = dip(16)
-            leftPadding = dip (16)
-            rightPadding = dip (16)
-
-            spinner = spinner()
-            swipeRefresh = swipeRefreshLayout {
-                setColorSchemeResources(R.color.colorAccent,
-                        android.R.color.holo_green_light,
-                        android.R.color.holo_orange_light,
-                        android.R.color.holo_red_light)
-
-                relativeLayout {
-                    lparams(width = matchParent, height = wrapContent)
-
-                    listTeam = recyclerView {
-                        lparams(width = matchParent, height = wrapContent)
-                        layoutManager = LinearLayoutManager(ctx)
-                    }
-
-                    progressBar = progressBar {}
-                            .lparams{centerHorizontally()}
+    private fun initView(savedInstanceState: Bundle?) {
+        bottom_navigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.teams -> {
+                    loadTeamsFragment(savedInstanceState)
                 }
-
+                R.id.favorites -> {
+                    loadFavoritesFragment(savedInstanceState)
+                }
             }
+            true
         }
+        bottom_navigation.selectedItemId = R.id.teams
+    }
 
-        val spinnerItems = resources.getStringArray(R.array.league)
-        val spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
-        spinner.adapter = spinnerAdapter as SpinnerAdapter?
-
-        initAdapter()
-
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                leagueName = spinner.selectedItem.toString()
-                presenter.getTeamList(leagueName)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
-
-        swipeRefresh.onRefresh {
-            presenter.getTeamList(leagueName)
+    private fun loadTeamsFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.main_container, TeamFragment(), TeamFragment::class.java.simpleName)
+                    .commit()
         }
     }
 
-    private fun initAdapter() {
-        adapter = FootballclubApiAdapter(teams)
-        listTeam.adapter = adapter
-
-        val request = ApiRepository()
-        val gson = Gson()
-        presenter = FootballClubApiPresenter(this, request, gson)
-    }
-
-    override fun showLoading() {
-        progressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideLoading() {
-        progressBar.visibility = View.INVISIBLE
-    }
-
-    override fun showTeamList(data: List<Team>) {
-        swipeRefresh.isRefreshing = false
-        teams.clear()
-        teams.addAll(data)
-        adapter.notifyDataSetChanged()
+    private fun loadFavoritesFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.main_container, FavoriteTeamsFragment(), FavoriteTeamsFragment::class.java.simpleName)
+                    .commit()
+        }
     }
 }

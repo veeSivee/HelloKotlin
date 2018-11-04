@@ -84,4 +84,6 @@
     <string name="football_match_schedule">Football Match Schedule</string>
     <string name="list_football_from_api">List of Football From API</string>
     <string name="match_detail">Match Detail</string>
+    <string name="favorites">Favorites</string>
+    <string name="teams">Teams</string>
 </resources>

@@ -26,7 +26,8 @@
             android:name=".view.footballmatch.footballmatchschedule.FootballMatchScheduleActivity"
             android:label="@string/title_activity_football_match_schedule"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.footballmatch.detail.FootballMatchDetailActivity"/>
+        <activity android:name=".view.footballmatch.detail.FootballMatchDetailActivity" />
+        <activity android:name=".view.footballclubfromapi.TeamDetailActivity"/>
     </application>
 
 </manifest>
