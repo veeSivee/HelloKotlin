@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.footballclubfromapi.favorite
+package vi.learning.hellokotlin.view.footballclub.favorite
 
 import android.content.Context
 import android.os.Bundle
@@ -19,7 +19,7 @@ import org.jetbrains.anko.support.v4.swipeRefreshLayout
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.db.Favorite
 import vi.learning.hellokotlin.db.database
-import vi.learning.hellokotlin.view.footballclubfromapi.TeamDetailActivity
+import vi.learning.hellokotlin.view.footballclub.detail.TeamDetailActivity
 
 /**
  * Created by taufiqotulfaidah on 11/4/18.

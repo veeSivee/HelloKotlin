@@ -1,10 +1,11 @@
-package vi.learning.hellokotlin.view.footballclubfromapi
+package vi.learning.hellokotlin.view.footballclub
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_football_club.*
 import vi.learning.hellokotlin.R
-import vi.learning.hellokotlin.view.footballclubfromapi.favorite.FavoriteTeamsFragment
+import vi.learning.hellokotlin.view.footballclub.favorite.FavoriteTeamsFragment
+import vi.learning.hellokotlin.view.footballclub.team.TeamFragment
 
 /**
  * Created by taufiqotulfaidah on 10/30/18.

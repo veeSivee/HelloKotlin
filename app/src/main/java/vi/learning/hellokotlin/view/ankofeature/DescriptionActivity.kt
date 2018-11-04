@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.footballclublist
+package vi.learning.hellokotlin.view.ankofeature
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

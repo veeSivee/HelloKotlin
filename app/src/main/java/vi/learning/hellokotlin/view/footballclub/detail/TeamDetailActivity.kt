@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.footballclubfromapi
+package vi.learning.hellokotlin.view.footballclub.detail
 
 import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
@@ -28,7 +28,7 @@ import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.data.ApiRepository
 import vi.learning.hellokotlin.db.Favorite
 import vi.learning.hellokotlin.db.database
-import vi.learning.hellokotlin.model.footballclubfromapi.Team
+import vi.learning.hellokotlin.model.footballclub.Team
 import vi.learning.hellokotlin.presenter.TeamDetailPresenter
 
 class TeamDetailActivity : AppCompatActivity(), TeamDetailView {

@@ -19,15 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.ankofeature.AnkoFeatureActivity" />
-        <activity android:name=".view.footballclublist.DescriptionActivity" />
-        <activity android:name=".view.footballclublist.FootballClubActivity" />
-        <activity android:name=".view.footballclubfromapi.FootballclubFromApiActivity" />
+        <activity android:name=".view.ankofeature.DescriptionActivity" />
+        <activity android:name=".view.footballclub.FootballclubFromApiActivity" />
         <activity
             android:name=".view.footballmatch.footballmatchschedule.FootballMatchScheduleActivity"
             android:label="@string/title_activity_football_match_schedule"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.footballmatch.detail.FootballMatchDetailActivity" />
-        <activity android:name=".view.footballclubfromapi.TeamDetailActivity"/>
+        <activity android:name=".view.footballclub.detail.TeamDetailActivity"/>
     </application>
 
 </manifest>

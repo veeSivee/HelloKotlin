@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.footballclubfromapi
+package vi.learning.hellokotlin.view.footballclub.team
 
 import android.content.Context
 import android.os.Bundle
@@ -18,8 +18,11 @@ import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.data.ApiRepository
-import vi.learning.hellokotlin.model.footballclubfromapi.Team
+import vi.learning.hellokotlin.model.footballclub.Team
 import vi.learning.hellokotlin.presenter.FootballClubApiPresenter
+import vi.learning.hellokotlin.view.footballclub.FootballClubApiView
+import vi.learning.hellokotlin.view.footballclub.FootballclubApiAdapter
+import vi.learning.hellokotlin.view.footballclub.detail.TeamDetailActivity
 
 /**
  * Created by taufiqotulfaidah on 11/4/18.

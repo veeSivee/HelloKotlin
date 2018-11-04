@@ -7,8 +7,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.view.ankofeature.AnkoFeatureActivity
-import vi.learning.hellokotlin.view.footballclubfromapi.FootballclubFromApiActivity
-import vi.learning.hellokotlin.view.footballclublist.FootballClubActivity
+import vi.learning.hellokotlin.view.footballclub.FootballclubFromApiActivity
 import vi.learning.hellokotlin.view.footballmatch.footballmatchschedule.FootballMatchScheduleActivity
 
 class MainActivity : AppCompatActivity() {
@@ -41,15 +40,6 @@ class MainActivity : AppCompatActivity() {
                     backgroundColor = ContextCompat.getColor(context, R.color.colorAccent)
                     onClick {
                         startActivity<AnkoFeatureActivity>()
-                    }
-                }.lparams(width = matchParent){
-                    topMargin = dip(5)
-                }
-
-                button("List Of Football Club") {
-                    backgroundColor = ContextCompat.getColor(context, R.color.colorAccent)
-                    onClick {
-                        startActivity<FootballClubActivity>()
                     }
                 }.lparams(width = matchParent){
                     topMargin = dip(5)

@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.footballclubfromapi.favorite
+package vi.learning.hellokotlin.view.footballclub.favorite
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -11,7 +11,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.db.Favorite
-import vi.learning.hellokotlin.view.footballclubfromapi.TeamUI
+import vi.learning.hellokotlin.view.footballclub.TeamUI
 
 /**
  * Created by taufiqotulfaidah on 11/4/18.

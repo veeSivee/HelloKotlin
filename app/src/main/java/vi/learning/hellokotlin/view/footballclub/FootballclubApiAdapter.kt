@@ -1,4 +1,4 @@
-package vi.learning.hellokotlin.view.footballclubfromapi
+package vi.learning.hellokotlin.view.footballclub
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import vi.learning.hellokotlin.R
-import vi.learning.hellokotlin.model.footballclubfromapi.Team
+import vi.learning.hellokotlin.model.footballclub.Team
 
 /**
  * Created by taufiqotulfaidah on 10/30/18.

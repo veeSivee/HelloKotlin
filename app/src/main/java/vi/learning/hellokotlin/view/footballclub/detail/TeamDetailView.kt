@@ -1,6 +1,6 @@
-package vi.learning.hellokotlin.view.footballclubfromapi
+package vi.learning.hellokotlin.view.footballclub.detail
 
-import vi.learning.hellokotlin.model.footballclubfromapi.Team
+import vi.learning.hellokotlin.model.footballclub.Team
 
 /**
  * Created by taufiqotulfaidah on 11/4/18.

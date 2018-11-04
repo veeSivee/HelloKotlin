@@ -5,8 +5,8 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import vi.learning.hellokotlin.data.ApiRepository
 import vi.learning.hellokotlin.data.TheSportDBApi
-import vi.learning.hellokotlin.model.footballclubfromapi.TeamResponse
-import vi.learning.hellokotlin.view.footballclubfromapi.TeamDetailView
+import vi.learning.hellokotlin.model.footballclub.TeamResponse
+import vi.learning.hellokotlin.view.footballclub.detail.TeamDetailView
 
 /**
  * Created by taufiqotulfaidah on 11/4/18.
