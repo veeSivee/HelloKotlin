@@ -1,14 +1,19 @@
 package vi.learning.hellokotlin.presenter
 
+import android.content.Context
 import com.google.gson.Gson
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import vi.learning.hellokotlin.data.ApiRepository
 import vi.learning.hellokotlin.data.TheSportDBApi
+import vi.learning.hellokotlin.db.FavoriteMatch
+import vi.learning.hellokotlin.db.database
 import vi.learning.hellokotlin.model.footballclub.Team
 import vi.learning.hellokotlin.model.footballclub.TeamResponse
 import vi.learning.hellokotlin.model.footballmatch.EventResponse
-import vi.learning.hellokotlin.view.footballmatch.footballmatchschedule.FootballMatchScheduleView
+import vi.learning.hellokotlin.view.footballmatch.FootballMatchScheduleView
 
 /**
  * Created by taufiqotulfaidah on 10/31/18.
@@ -66,5 +71,15 @@ class FootballMatchPresenter (private val view: FootballMatchScheduleView,
             }
         }
         return ""
+    }
+
+    fun getFavoriteList(context: Context?) {
+        view.showLoading()
+        context?.database?.use {
+            val result = select(FavoriteMatch.TABLE_FAVORITE_MATCH)
+            val favorite = result.parseList(classParser<FavoriteMatch>())
+            view.showFavorites(favorite)
+        }
+        view.hideLoading()
     }
 }

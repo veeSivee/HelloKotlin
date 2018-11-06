@@ -8,7 +8,7 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.view.ankofeature.AnkoFeatureActivity
 import vi.learning.hellokotlin.view.footballclub.FootballclubFromApiActivity
-import vi.learning.hellokotlin.view.footballmatch.footballmatchschedule.FootballMatchScheduleActivity
+import vi.learning.hellokotlin.view.footballmatch.FootballMatchScheduleActivity
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,7 +1,8 @@
-package vi.learning.hellokotlin.view.footballmatch.footballmatchschedule
+package vi.learning.hellokotlin.view.footballmatch.schedule
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,12 +11,17 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_football_match_schedule.view.*
+import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.startActivity
 import vi.learning.hellokotlin.ConstantValue
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.data.ApiRepository
+import vi.learning.hellokotlin.db.FavoriteMatch
 import vi.learning.hellokotlin.model.footballmatch.Event
 import vi.learning.hellokotlin.presenter.FootballMatchPresenter
+import vi.learning.hellokotlin.view.footballmatch.EventClickListener
+import vi.learning.hellokotlin.view.footballmatch.FootballMatchScheduleAdapter
+import vi.learning.hellokotlin.view.footballmatch.FootballMatchScheduleView
 import vi.learning.hellokotlin.view.footballmatch.detail.FootballMatchDetailActivity
 
 /**
@@ -29,6 +35,7 @@ abstract class BaseListMatchFragment : Fragment(), FootballMatchScheduleView, Ev
 
     private lateinit var listTeam: RecyclerView
     private lateinit var pbListMatch: ProgressBar
+    private lateinit var swipeRefresh: SwipeRefreshLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,13 +43,17 @@ abstract class BaseListMatchFragment : Fragment(), FootballMatchScheduleView, Ev
         listTeam = rootView.rv_list_match
         listTeam.layoutManager = LinearLayoutManager (rootView.context)
         pbListMatch = rootView.pb_list_match
+        swipeRefresh = rootView.refresh_match
         return rootView
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         initPresenter()
         getData()
+        swipeRefresh.onRefresh {
+            getData()
+        }
     }
 
     override fun showLoading() {
@@ -54,8 +65,21 @@ abstract class BaseListMatchFragment : Fragment(), FootballMatchScheduleView, Ev
     }
 
     override fun showMatchList(data: List<Event>) {
+        swipeRefresh.isRefreshing = false
         events.clear()
         events.addAll(data)
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun showFavorites(favorites: List<FavoriteMatch>) {
+        swipeRefresh.isRefreshing = false
+        events.clear()
+        for (favorite: FavoriteMatch in favorites) {
+            var event = Event(idEvent = favorite.eventId, homeTeam = favorite.teamHome,
+                    homeScore = favorite.teamHomeScore.toInt(), awayTeam = favorite.teamAway,
+                    awayScore = favorite.teamAwayScore.toInt(), eventDateDisplay = favorite.matchDate)
+            events.add(event)
+        }
         adapter.notifyDataSetChanged()
     }
 

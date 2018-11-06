@@ -67,11 +67,16 @@ class Event (
         var homeSubstitutes: String? = null,
 
         @SerializedName("strAwayLineupSubstitutes")
-        var awaySubstitutes: String? = null) {
+        var awaySubstitutes: String? = null,
 
-    fun getDisplayDate() : String {
-        val date = SimpleDateFormat("yyyy-MM-dd").parse(dateEvent)
-        val format = SimpleDateFormat("EEE, dd MMM yyyy")
-        return format.format(date)
+        var eventDateDisplay: String? = null) {
+
+    fun getDisplayDate() : String? {
+        if (eventDateDisplay == null) {
+            val date = SimpleDateFormat("yyyy-MM-dd").parse(dateEvent)
+            val format = SimpleDateFormat("EEE, dd MMM yyyy")
+            eventDateDisplay = format.format(date)
+        }
+        return eventDateDisplay
     }
 }
