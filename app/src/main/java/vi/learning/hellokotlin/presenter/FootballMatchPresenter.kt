@@ -2,10 +2,11 @@ package vi.learning.hellokotlin.presenter
 
 import android.content.Context
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import vi.learning.hellokotlin.data.ApiRepository
 import vi.learning.hellokotlin.data.TheSportDBApi
 import vi.learning.hellokotlin.db.FavoriteMatch
@@ -26,27 +27,23 @@ class FootballMatchPresenter (private val view: FootballMatchScheduleView,
 
     fun getNextMatchList(id: String) {
         view.showLoading()
-        doAsync {
-            val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getNextMatchSchedule(id)),
+        GlobalScope.launch(Dispatchers.Main) {
+            val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getNextMatchSchedule(id)).await(),
                     EventResponse::class.java)
 
-            uiThread {
-                view.hideLoading()
-                view.showMatchList(data.events)
-            }
+            view.hideLoading()
+            view.showMatchList(data.events)
         }
     }
 
     fun getPastMatchList(id: String) {
         view.showLoading()
-        doAsync {
-            val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getPastMatchSchedule(id)),
+        GlobalScope.launch(Dispatchers.Main) {
+            val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getPastMatchSchedule(id)).await(),
                     EventResponse::class.java)
 
-            uiThread {
-                view.hideLoading()
-                view.showMatchList(data.events)
-            }
+            view.hideLoading()
+            view.showMatchList(data.events)
         }
     }
 
@@ -56,8 +53,8 @@ class FootballMatchPresenter (private val view: FootballMatchScheduleView,
         var index : Int = idLeague.indexOf(id)
         var league = strLeague[index]
 
-        doAsync {
-            val dataTeam = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeams(league)),
+        GlobalScope.launch(Dispatchers.Main) {
+            val dataTeam = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeams(league)).await(),
                     TeamResponse::class.java)
             data = dataTeam.teams
         }

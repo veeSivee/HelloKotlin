@@ -1,8 +1,9 @@
 package vi.learning.hellokotlin.presenter
 
 import com.google.gson.Gson
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import vi.learning.hellokotlin.data.ApiRepository
 import vi.learning.hellokotlin.data.TheSportDBApi
 import vi.learning.hellokotlin.model.footballclub.TeamResponse
@@ -16,14 +17,14 @@ class FootballClubApiPresenter(private val view: FootballClubApiView,
                                private val gson: Gson) {
     fun getTeamList (league: String?) {
         view.showLoading()
-        doAsync {
-            val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeams(league)),
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeams(league))
+                    .await(),
                     TeamResponse::class.java)
 
-            uiThread {
-                view.hideLoading()
-                view.showTeamList(data.teams)
-            }
+            view.hideLoading()
+            view.showTeamList(data.teams)
         }
     }
 }

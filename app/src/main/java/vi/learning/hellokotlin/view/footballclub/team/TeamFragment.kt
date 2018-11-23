@@ -51,7 +51,9 @@ class TeamFragment : Fragment(), AnkoComponent<Context>, FootballClubApiView {
             leftPadding = dip(16)
             rightPadding = dip(16)
 
-            spinner = spinner()
+            spinner = spinner {
+                id = R.id.sprinner_team
+            }
             swipeRefresh = swipeRefreshLayout {
                 setColorSchemeResources(R.color.colorAccent,
                         android.R.color.holo_green_light,

@@ -105,7 +105,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
             database.use {
                 delete(Favorite.TABLE_FAVORITE, "(TEAM_ID = {id})", "id" to id)
             }
-            snackbar(swipeRefresh, "Removed to favorite").show()
+            snackbar(swipeRefresh, "Removed from favorite").show()
         } catch (e: SQLiteConstraintException) {
             snackbar(swipeRefresh, e.localizedMessage).show()
         }

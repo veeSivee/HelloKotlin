@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 button("Anko Feature") {
+                    id = R.id.anko_feature
                     backgroundColor = ContextCompat.getColor(context, R.color.colorAccent)
                     onClick {
                         startActivity<AnkoFeatureActivity>()
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 button("Football Club from API") {
+                    id = R.id.football_club
                     backgroundColor = ContextCompat.getColor(context, R.color.colorAccent)
                     onClick {
                         startActivity<FootballclubFromApiActivity>()
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 button("Football Match (Submission)") {
+                    id = R.id.football_match
                     backgroundColor = ContextCompat.getColor(context, R.color.colorAccent)
                     onClick {
                         startActivity<FootballMatchScheduleActivity>()
