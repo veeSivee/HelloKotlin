@@ -76,20 +76,4 @@ class FootballMatchPresenterTest {
         }
     }
 
-    @Test
-    fun getTeamList() {
-    }
-
-    @Test
-    fun getImageUrl() {
-    }
-
-    @Test
-    fun getFavoriteList() {
-        /*val context = mock(Context::class.java)
-        presenter.getFavoriteList(context)
-        Mockito.verify(view).showLoading()
-        Mockito.verify(view).hideLoading()*/
-    }
-
 }

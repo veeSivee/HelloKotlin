@@ -22,17 +22,28 @@ class FootballclubFromApiActivityTest {
     @Rule
     @JvmField var activityRule = ActivityTestRule(FootballclubFromApiActivity::class.java)
 
+    private fun delay(){
+        try {
+            Thread.sleep(2000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+    }
+
     @Test
     fun testAddFavorite() {
+        delay()
         Espresso.onView(ViewMatchers.withId(R.id.sprinner_team))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.sprinner_team)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withText("German Bundesliga")).perform(ViewActions.click())
 
+        delay()
         Espresso.onView(ViewMatchers.withText("Ein Frankfurt"))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withText("Ein Frankfurt")).perform(ViewActions.click())
 
+        delay()
         Espresso.onView(ViewMatchers.withId(R.id.add_to_favorite))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.add_to_favorite)).perform(ViewActions.click())
@@ -40,6 +51,7 @@ class FootballclubFromApiActivityTest {
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.pressBack()
 
+        delay()
         Espresso.onView(ViewMatchers.withId(R.id.bottom_navigation))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.favorites)).perform(ViewActions.click())
@@ -47,15 +59,18 @@ class FootballclubFromApiActivityTest {
 
     @Test
     fun testRemoveFavorite() {
+        delay()
         Espresso.onView(ViewMatchers.withId(R.id.sprinner_team))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.sprinner_team)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withText("German Bundesliga")).perform(ViewActions.click())
 
+        delay()
         Espresso.onView(ViewMatchers.withText("Ein Frankfurt"))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withText("Ein Frankfurt")).perform(ViewActions.click())
 
+        delay()
         Espresso.onView(ViewMatchers.withId(R.id.add_to_favorite))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.add_to_favorite)).perform(ViewActions.click())
@@ -63,6 +78,7 @@ class FootballclubFromApiActivityTest {
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.pressBack()
 
+        delay()
         Espresso.onView(ViewMatchers.withId(R.id.bottom_navigation))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.favorites)).perform(ViewActions.click())
