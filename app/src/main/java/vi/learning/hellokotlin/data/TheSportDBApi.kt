@@ -1,6 +1,5 @@
 package vi.learning.hellokotlin.data
 
-import android.net.Uri
 import vi.learning.hellokotlin.BuildConfig
 
 /**
@@ -9,59 +8,26 @@ import vi.learning.hellokotlin.BuildConfig
 object TheSportDBApi {
 
     fun getTeams(league: String?): String {
-        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
-                .appendPath("api")
-                .appendPath("v1")
-                .appendPath("json")
-                .appendPath(BuildConfig.TSDB_API_KEY)
-                .appendPath("search_all_teams.php")
-                .appendQueryParameter("l", league)
-                .build()
-                .toString()
+        return getUncompleteUrl() + "/search_all_teams.php?l=" + league
     }
 
     fun getNextMatchSchedule(id: String?): String {
-        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
-                .appendPath("api")
-                .appendPath("v1")
-                .appendPath("json")
-                .appendPath(BuildConfig.TSDB_API_KEY)
-                .appendPath("eventsnextleague.php")
-                .appendQueryParameter("id", id)
-                .build().toString()
+        return getUncompleteUrl() + "/eventsnextleague.php?id=" + id
     }
 
     fun getPastMatchSchedule(id: String?): String {
-        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
-                .appendPath("api")
-                .appendPath("v1")
-                .appendPath("json")
-                .appendPath(BuildConfig.TSDB_API_KEY)
-                .appendPath("eventspastleague.php")
-                .appendQueryParameter("id", id)
-                .build().toString()
+        return getUncompleteUrl() + "/eventspastleague.php?id=" + id
     }
 
     fun getEventDetail(id: String): String {
-        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
-                .appendPath("api")
-                .appendPath("v1")
-                .appendPath("json")
-                .appendPath(BuildConfig.TSDB_API_KEY)
-                .appendPath("lookupevent.php")
-                .appendQueryParameter("id", id)
-                .build().toString()
+        return getUncompleteUrl() + "/lookupevent.php?id=" + id
     }
 
     fun getTeamDetail(teamId: String?): String{
-        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
-                .appendPath("api")
-                .appendPath("v1")
-                .appendPath("json")
-                .appendPath(BuildConfig.TSDB_API_KEY)
-                .appendPath("lookupteam.php")
-                .appendQueryParameter("id", teamId)
-                .build()
-                .toString()
+        return getUncompleteUrl() + "/lookupteam.php?id=" + teamId
+    }
+
+    private fun getUncompleteUrl() : String {
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}";
     }
 }
