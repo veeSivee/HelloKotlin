@@ -1,21 +1,21 @@
 package vi.learning.hellokotlin.view.footballclub.team
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.SearchView
+import android.view.*
 import android.widget.*
 import com.google.gson.Gson
-import org.jetbrains.anko.*
-import org.jetbrains.anko.recyclerview.v7.recyclerView
+import kotlinx.android.synthetic.main.fragment_football_match.view.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import vi.learning.hellokotlin.ConstantValue
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.data.ApiRepository
 import vi.learning.hellokotlin.model.footballclub.Team
@@ -23,11 +23,12 @@ import vi.learning.hellokotlin.presenter.FootballClubApiPresenter
 import vi.learning.hellokotlin.view.footballclub.FootballClubApiView
 import vi.learning.hellokotlin.view.footballclub.FootballclubApiAdapter
 import vi.learning.hellokotlin.view.footballclub.detail.TeamDetailClubActivity
+import vi.learning.hellokotlin.view.search.SearchTeamActivity
 
 /**
  * Created by taufiqotulfaidah on 11/4/18.
  */
-class TeamFragment : Fragment(), AnkoComponent<Context>, FootballClubApiView {
+class TeamFragment : Fragment(), FootballClubApiView {//, AnkoComponent<Context>
 
     private var teams: MutableList<Team> = mutableListOf()
     private lateinit var presenter: FootballClubApiPresenter
@@ -39,46 +40,54 @@ class TeamFragment : Fragment(), AnkoComponent<Context>, FootballClubApiView {
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return createView(AnkoContext.create(ctx))
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
-    override fun createView(ui: AnkoContext<Context>): View = with(ui) {
-        linearLayout {
-            lparams(width = matchParent, height = wrapContent)
-            orientation = LinearLayout.VERTICAL
-            topPadding = dip(16)
-            leftPadding = dip(16)
-            rightPadding = dip(16)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_team, container, false)
+        (activity as AppCompatActivity).setSupportActionBar(rootView.toolbar)
+        initView(rootView)
+        return rootView
+    }
 
-            spinner = spinner {
-                id = R.id.sprinner_team
+    private fun initView(view: View) {
+        progressBar = view.findViewById(R.id.pb_team)
+        swipeRefresh = view.findViewById(R.id.swipe_team)
+        spinner = view.findViewById(R.id.sp_team)
+        listTeam = view.findViewById(R.id.rv_team)
+        listTeam.layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.search_menu, menu)
+
+        val searchView = menu?.findItem(R.id.search)?.actionView as SearchView?
+        searchView?.queryHint = "Search teams"
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(keyword: String?): Boolean {
+                val intent = Intent(ctx, SearchTeamActivity::class.java)
+                intent.putExtra(ConstantValue.KEYWORD, keyword)
+                startActivity(intent)
+                return false
             }
-            swipeRefresh = swipeRefreshLayout {
-                setColorSchemeResources(R.color.colorAccent,
-                        android.R.color.holo_green_light,
-                        android.R.color.holo_orange_light,
-                        android.R.color.holo_red_light)
 
-                relativeLayout {
-                    lparams(width = matchParent, height = wrapContent)
-
-                    listTeam = recyclerView {
-                        lparams(width = matchParent, height = wrapContent)
-                        layoutManager = LinearLayoutManager(ctx)
-                    }
-
-                    progressBar = progressBar {}
-                            .lparams { centerHorizontally() }
-                }
-
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
             }
-        }
+
+        })
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        init()
+    }
 
+    private fun init() {
         val spinnerItems = resources.getStringArray(R.array.league)
         val spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
         spinner.adapter = spinnerAdapter as SpinnerAdapter?
@@ -101,7 +110,7 @@ class TeamFragment : Fragment(), AnkoComponent<Context>, FootballClubApiView {
 
     private fun initAdapter() {
         adapter = FootballclubApiAdapter(teams) {
-            ctx.startActivity<TeamDetailClubActivity>("id" to "${it.teamId}")
+            ctx.startActivity<TeamDetailClubActivity>("id" to "${it.teamId}", "teamName" to it.teamName)
         }
         listTeam.adapter = adapter
 
@@ -115,7 +124,7 @@ class TeamFragment : Fragment(), AnkoComponent<Context>, FootballClubApiView {
     }
 
     override fun hideLoading() {
-        progressBar.visibility = View.INVISIBLE
+        progressBar.visibility = View.GONE
     }
 
     override fun showTeamList(data: List<Team>) {

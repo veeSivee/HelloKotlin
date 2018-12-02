@@ -41,8 +41,6 @@
     <string name="team_years">Team Year</string>
     <string name="stadium_name">Stadium</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="weight_kg">Weight (Kg)</string>
     <string name="height_m">Height (m)</string>
     <string name="tab_overview">Overview</string>
@@ -51,4 +49,7 @@
     <string name="tab_last">Last</string>
     <string name="tab_matches">Matches</string>
     <string name="tab_teams">Teams</string>
+    <string name="title_match">Football Match</string>
+    <string name="title_search_match">Search Matches</string>
+    <string name="title_search_team">Search Teams</string>
 </resources>

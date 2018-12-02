@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.gson.Gson
+import vi.learning.hellokotlin.ConstantValue
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.data.ApiRepository
 import vi.learning.hellokotlin.model.footballclub.Player
@@ -21,8 +22,7 @@ import vi.learning.hellokotlin.presenter.PlayerPresenter
 class PlayerFragment : Fragment(), PlayerView {
 
     private var columnCount = 1
-    private lateinit var id : String
-    private var teamName = ""
+    private lateinit var teamName : String
     private var listener: OnListFragmentInteractionListener? = null
 
     private lateinit var presenter: PlayerPresenter
@@ -35,7 +35,7 @@ class PlayerFragment : Fragment(), PlayerView {
 
         if (arguments != null) {
             columnCount = arguments!!.getInt(COLUMN_COUNT)
-            id = arguments!!.getString(ID_TEAM)
+            teamName = arguments!!.getString(TEAM_NAME)
         }
     }
 
@@ -74,7 +74,9 @@ class PlayerFragment : Fragment(), PlayerView {
     }
 
     private fun getTeamDetail() {
-        presenter.getTeamDetail(teamName)
+        if (teamName.isNotEmpty()) {
+            presenter.getTeamDetail(teamName)
+        }
     }
 
     override fun onAttach(context: Context?) {
@@ -118,13 +120,13 @@ class PlayerFragment : Fragment(), PlayerView {
     companion object {
 
         private val COLUMN_COUNT = "column-count"
-        private val ID_TEAM = "id"
+        private val TEAM_NAME = ConstantValue.TEAM_NAME
 
-        fun newInstance(columnCount: Int, id: String): PlayerFragment {
+        fun newInstance(columnCount: Int, teamName: String): PlayerFragment {
             val fragment = PlayerFragment()
             val args = Bundle()
             args.putInt(COLUMN_COUNT, columnCount)
-            args.putString(ID_TEAM, id)
+            args.putString(TEAM_NAME, teamName)
             fragment.arguments = args
             return fragment
         }

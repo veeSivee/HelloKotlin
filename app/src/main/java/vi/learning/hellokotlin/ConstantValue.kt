@@ -12,5 +12,6 @@ class ConstantValue {
         val ID : String = "id"
         val PLAYER : String = "player"
         val KEYWORD : String = "keyword"
+        val TEAM_NAME : String = "teamName"
     }
 }

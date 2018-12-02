@@ -25,7 +25,9 @@ class SearchMatchPresenter (private val view: SearchMatchView,
                     SearchedMatchResponse::class.java)
 
             view.hideLoading()
-            view.showMatchList(data.event)
+            if (data != null && data.event != null) {
+                view.showMatchList(data.event)
+            }
         }
     }
 }

@@ -42,4 +42,8 @@ object TheSportDBApi {
     fun getAllPlayerByTeamId(id: String?): String {
         return getUncompleteUrl() + "/searchplayers.php?t=$id"
     }
+
+    fun getSearchteam(keyword: String) : String {
+        return getUncompleteUrl() + "/searchteams.php?t=$keyword"
+    }
 }

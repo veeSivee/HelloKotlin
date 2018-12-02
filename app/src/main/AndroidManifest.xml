@@ -20,17 +20,22 @@
         </activity>
         <activity android:name=".view.ankofeature.AnkoFeatureActivity" />
         <activity android:name=".view.ankofeature.DescriptionActivity" />
-        <activity android:name=".view.footballclub.FootballclubFromApiActivity" />
+        <activity
+            android:name=".view.footballclub.FootballclubFromApiActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.footballmatch.FootballMatchScheduleActivity"
-            android:label="@string/title_activity_football_match_schedule" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.footballmatch.detail.FootballMatchDetailActivity" />
         <activity android:name=".view.footballclub.detail.TeamDetailActivity" />
-        <activity android:name=".view.search.SearchMatchActivity" />
+        <activity android:name=".view.search.SearchMatchActivity"
+            android:label="@string/title_search_match" />
         <activity
             android:name=".view.footballclub.detail.TeamDetailClubActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.footballclub.detail.PlayerDetailActivity"/>
+        <activity android:name=".view.footballclub.detail.PlayerDetailActivity" />
+        <activity android:name=".view.search.SearchTeamActivity"
+            android:label="@string/title_search_team"/>
     </application>
 
 </manifest>

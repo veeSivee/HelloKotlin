@@ -25,7 +25,9 @@ class PlayerPresenter(private val view: PlayerView,
                     .await(),
                     PlayerResponse::class.java
             )
-            view.showPlayerList(data.player)
+            if (data != null && data.player != null) {
+                view.showPlayerList(data.player)
+            }
         }
     }
 }

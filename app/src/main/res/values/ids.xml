@@ -6,4 +6,5 @@
     <item name="football_club" type="id" />
     <item name="football_match" type="id" />
     <item name="sprinner_team" type="id" />
+    <item name="team_toolbar" type="id" />
 </resources>

@@ -1,7 +1,6 @@
 package vi.learning.hellokotlin.view.search
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -13,29 +12,28 @@ import android.widget.ProgressBar
 import com.google.gson.Gson
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 import vi.learning.hellokotlin.ConstantValue
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.data.ApiRepository
-import vi.learning.hellokotlin.model.footballmatch.Event
-import vi.learning.hellokotlin.presenter.SearchMatchPresenter
-import vi.learning.hellokotlin.view.footballmatch.EventClickListener
-import vi.learning.hellokotlin.view.footballmatch.FootballMatchScheduleAdapter
-import vi.learning.hellokotlin.view.footballmatch.detail.FootballMatchDetailActivity
+import vi.learning.hellokotlin.model.footballclub.Team
+import vi.learning.hellokotlin.presenter.SearchTeamPresenter
+import vi.learning.hellokotlin.view.footballclub.FootballclubApiAdapter
+import vi.learning.hellokotlin.view.footballclub.detail.TeamDetailClubActivity
 
-class SearchMatchActivity : AppCompatActivity(), AnkoComponent<Context>, SearchMatchView , EventClickListener {
+class SearchTeamActivity : AppCompatActivity(), AnkoComponent<Context> , SearchTeamView {
 
     private lateinit var listMatch: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var keyword: String
-    private lateinit var presenter: SearchMatchPresenter
+    private lateinit var presenter: SearchTeamPresenter
 
-    private var events: MutableList<Event> = mutableListOf()
-    private lateinit var adapter: FootballMatchScheduleAdapter
+    private var teams: MutableList<Team> = mutableListOf()
+    private lateinit var adapter: FootballclubApiAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(this)
         initPresenter()
         getData()
@@ -44,51 +42,33 @@ class SearchMatchActivity : AppCompatActivity(), AnkoComponent<Context>, SearchM
     private fun initPresenter() {
         val request = ApiRepository()
         val gson = Gson()
-        presenter = SearchMatchPresenter(this, request, gson)
+        presenter = SearchTeamPresenter(this, request, gson)
     }
 
     private fun getData() {
         keyword = intent.getStringExtra(ConstantValue.KEYWORD)
 
-        if (keyword.isNotBlank()) {
-            presenter.searchMatch(keyword)
+        adapter = FootballclubApiAdapter(teams){
+            ctx.startActivity<TeamDetailClubActivity>(ConstantValue.ID to it.teamId,
+                    ConstantValue.TEAM_NAME to it.teamName)
         }
-
-        adapter = FootballMatchScheduleAdapter(events, this)
         listMatch.adapter = adapter
+
+        if (keyword.isNotBlank()) {
+            presenter.searchTeam(keyword)
+        }
     }
 
-    override fun showLoading() {
-        progressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideLoading() {
-        progressBar.visibility = View.GONE
-    }
-
-    override fun showMatchList(data: List<Event>) {
-        events.clear()
-        events.addAll(data)
-        adapter.notifyDataSetChanged()
-    }
-
-    override fun OnClick(event: Event) {
-        val awayBadge : String? = ""//presenter.getImageUrl(event.awayTeam)
-        val homeBadge : String? = ""//presenter.getImageUrl(event.homeTeam)
-        startActivity<FootballMatchDetailActivity>(ConstantValue.ID_EVENT to event.idEvent,
-                ConstantValue.AWAY_BADGE to awayBadge,
-                ConstantValue.HOME_BADGE to homeBadge)
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search_menu, menu)
 
         val searchView = menu?.findItem(R.id.search)?.actionView as SearchView?
-        searchView?.queryHint = "Search matches"
+        searchView?.queryHint = "Search teams"
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(key: String): Boolean {
                 keyword = key
-                presenter.searchMatch(key)
+                presenter.searchTeam(key)
                 return false
             }
 
@@ -99,6 +79,20 @@ class SearchMatchActivity : AppCompatActivity(), AnkoComponent<Context>, SearchM
         })
 
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun showLoading() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        progressBar.visibility = View.GONE
+    }
+
+    override fun showTeamList(data: List<Team>) {
+        teams.clear()
+        teams.addAll(data)
+        adapter.notifyDataSetChanged()
     }
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {

@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     topMargin = dip(5)
                 }
 
-                button("Football Club from API") {
+                /*button("Football Club from API") {
                     id = R.id.football_club
                     backgroundColor = ContextCompat.getColor(context, R.color.colorAccent)
                     onClick {
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }.lparams(width = matchParent){
                     topMargin = dip(5)
-                }
+                }*/
 
                 button("Football Match (Submission)") {
                     id = R.id.football_match

@@ -33,6 +33,7 @@ class TeamDetailClubActivity : AppCompatActivity(), PlayerFragment.OnListFragmen
     private lateinit var presenter: TeamDetailPresenter
     private lateinit var teams: Team
     private lateinit var id: String
+    private lateinit var teamName: String
 
     private var menuItem: Menu? = null
     private var isFavorite: Boolean = false
@@ -47,6 +48,7 @@ class TeamDetailClubActivity : AppCompatActivity(), PlayerFragment.OnListFragmen
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setTitle("")
         id = intent.getStringExtra(ConstantValue.ID)
+        teamName = intent.getStringExtra(ConstantValue.TEAM_NAME)
 
         setupViewPager(container)
         tabs.setupWithViewPager(container)
@@ -58,7 +60,7 @@ class TeamDetailClubActivity : AppCompatActivity(), PlayerFragment.OnListFragmen
 
     private fun setupViewPager(viewPager: ViewPager) {
         overviewFragment = OverviewFragment.newInstance("")
-        playerFragment = PlayerFragment.newInstance(3, id)
+        playerFragment = PlayerFragment.newInstance(3, teamName)
         adapter = TeamAdapter(supportFragmentManager)
         adapter.addFragment(overviewFragment, getString(R.string.tab_overview))
         adapter.addFragment(playerFragment, getString(R.string.tab_player))

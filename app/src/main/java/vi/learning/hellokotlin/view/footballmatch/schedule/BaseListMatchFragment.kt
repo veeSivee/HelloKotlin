@@ -14,12 +14,10 @@ import kotlinx.android.synthetic.main.fragment_football_match_schedule.view.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 import vi.learning.hellokotlin.ConstantValue
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.data.ApiRepository
 import vi.learning.hellokotlin.db.FavoriteMatch
-import vi.learning.hellokotlin.model.footballclub.Team
 import vi.learning.hellokotlin.model.footballmatch.Event
 import vi.learning.hellokotlin.presenter.FootballMatchPresenter
 import vi.learning.hellokotlin.view.footballmatch.EventClickListener

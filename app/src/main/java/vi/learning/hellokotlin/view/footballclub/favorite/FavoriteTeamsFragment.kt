@@ -16,6 +16,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import vi.learning.hellokotlin.ConstantValue
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.db.Favorite
 import vi.learning.hellokotlin.db.database
@@ -36,7 +37,8 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
         super.onActivityCreated(savedInstanceState)
 
         adapter = FavoriteTeamAdapter(favorites) {
-            ctx.startActivity<TeamDetailClubActivity>("id" to "${it.teamId}")
+            ctx.startActivity<TeamDetailClubActivity>(ConstantValue.ID to it.teamId,
+                    ConstantValue.TEAM_NAME to it.teamName)
         }
 
         listEvent.adapter = adapter
