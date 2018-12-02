@@ -4,7 +4,7 @@ package vi.learning.hellokotlin.db
  * Created by taufiqotulfaidah on 11/6/18.
  */
 class FavoriteMatch (val id: Long?, val eventId: String?, val teamHome: String?, val teamHomeScore: String,
-                     val teamAway: String?, val teamAwayScore: String, val matchDate: String?) {
+                     val teamAway: String?, val teamAwayScore: String, val matchDate: String?, val matchHour: String?) {
 
     companion object {
         const val TABLE_FAVORITE_MATCH: String = "TABLE_FAVORITE_MATCH"
@@ -15,5 +15,6 @@ class FavoriteMatch (val id: Long?, val eventId: String?, val teamHome: String?,
         const val TEAM_AWAY: String = "TEAM_AWAY"
         const val TEAM_AWAY_SCORE: String = "TEAM_AWAY_SCORE"
         const val MATCH_DATE: String = "MATCH_DATE"
+        const val MATCH_HOUR: String = "MATCH_HOUR"
     }
 }

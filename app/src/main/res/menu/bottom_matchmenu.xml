@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/prev_match"
+        android:id="@+id/match"
         android:enabled="true"
-        android:title="@string/prev_match"
-        android:icon="@drawable/ic_teams"
+        android:title="@string/match"
+        android:icon="@drawable/ic_event"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/next_match"
+        android:id="@+id/teams"
         android:enabled="true"
-        android:title="@string/next_match"
-        android:icon="@drawable/ic_event"
+        android:title="@string/teams"
+        android:icon="@drawable/ic_teams"
         app:showAsAction="ifRoom"/>
 
     <item

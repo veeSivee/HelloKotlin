@@ -8,15 +8,18 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
+import android.widget.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_football_match_schedule.view.*
+import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 import vi.learning.hellokotlin.ConstantValue
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.data.ApiRepository
 import vi.learning.hellokotlin.db.FavoriteMatch
+import vi.learning.hellokotlin.model.footballclub.Team
 import vi.learning.hellokotlin.model.footballmatch.Event
 import vi.learning.hellokotlin.presenter.FootballMatchPresenter
 import vi.learning.hellokotlin.view.footballmatch.EventClickListener
@@ -36,6 +39,9 @@ abstract class BaseListMatchFragment : Fragment(), FootballMatchScheduleView, Ev
     private lateinit var listTeam: RecyclerView
     private lateinit var pbListMatch: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var spinner: Spinner
+    var leagueName = "English Premier League"
+    var idLeagueSelected = "4328"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -44,14 +50,18 @@ abstract class BaseListMatchFragment : Fragment(), FootballMatchScheduleView, Ev
         listTeam.layoutManager = LinearLayoutManager (rootView.context)
         pbListMatch = rootView.pb_list_match
         swipeRefresh = rootView.refresh_match
+        spinner = rootView.spinner_match
         return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initPresenter()
-        getData()
         swipeRefresh.onRefresh {
+            getData()
+        }
+
+        if (spinner.visibility == View.GONE) {
             getData()
         }
     }
@@ -77,7 +87,8 @@ abstract class BaseListMatchFragment : Fragment(), FootballMatchScheduleView, Ev
         for (favorite: FavoriteMatch in favorites) {
             var event = Event(idEvent = favorite.eventId, homeTeam = favorite.teamHome,
                     homeScore = favorite.teamHomeScore.toInt(), awayTeam = favorite.teamAway,
-                    awayScore = favorite.teamAwayScore.toInt(), eventDateDisplay = favorite.matchDate)
+                    awayScore = favorite.teamAwayScore.toInt(), eventDateDisplay = favorite.matchDate,
+                    strTime = favorite.matchHour)
             events.add(event)
         }
         adapter.notifyDataSetChanged()
@@ -91,6 +102,28 @@ abstract class BaseListMatchFragment : Fragment(), FootballMatchScheduleView, Ev
         }
     }
 
+    private fun initSpinner() {
+        val spinnerItems = resources.getStringArray(R.array.league)
+        val spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+        spinner.adapter = spinnerAdapter as SpinnerAdapter?
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                leagueName = spinner.selectedItem.toString()
+
+                var leagues = resources.getStringArray(R.array.league)
+                var idLeague : Array<String> = resources.getStringArray(R.array.id_league)
+
+                var index : Int = leagues.indexOf(leagueName)
+                idLeagueSelected = idLeague[index]
+
+                getData()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
     private fun initPresenter() {
         adapter = FootballMatchScheduleAdapter(events, this)
         listTeam.adapter = adapter
@@ -98,6 +131,8 @@ abstract class BaseListMatchFragment : Fragment(), FootballMatchScheduleView, Ev
         val request = ApiRepository()
         val gson = Gson()
         presenter = FootballMatchPresenter(this, request, gson)
+
+        initSpinner()
     }
 
     override fun OnClick(event: Event) {
@@ -106,6 +141,10 @@ abstract class BaseListMatchFragment : Fragment(), FootballMatchScheduleView, Ev
         startActivity<FootballMatchDetailActivity>(ConstantValue.ID_EVENT to event.idEvent,
                 ConstantValue.AWAY_BADGE to awayBadge,
                 ConstantValue.HOME_BADGE to homeBadge)
+    }
+
+    fun hideSpinner() {
+        spinner.visibility = View.GONE
     }
 
     abstract fun getData()

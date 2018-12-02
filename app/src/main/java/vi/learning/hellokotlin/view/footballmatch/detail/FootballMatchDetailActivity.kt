@@ -96,6 +96,7 @@ class FootballMatchDetailActivity : AppCompatActivity(), FootballMatchDetailView
         this.event = event
 
         tv_date_match.text = event.getDisplayDate()
+        tv_hour_match.text = event.getDisplayHour()
         if (event.homeScore > 0 || event.awayScore > 0) {
             tv_home_score.text = event.homeScore.toString()
             tv_away_score.text = event.awayScore.toString()
@@ -137,7 +138,8 @@ class FootballMatchDetailActivity : AppCompatActivity(), FootballMatchDetailView
                         FavoriteMatch.TEAM_HOME_SCORE to event.homeScore,
                         FavoriteMatch.TEAM_AWAY to event.awayTeam,
                         FavoriteMatch.TEAM_AWAY_SCORE to event.awayScore,
-                        FavoriteMatch.MATCH_DATE to event.getDisplayDate())
+                        FavoriteMatch.MATCH_DATE to event.getDisplayDate(),
+                        FavoriteMatch.MATCH_HOUR to event.strTime)
             }
             snackbar(ll_match, "Added to favorite").show()
         } catch (e: SQLiteConstraintException) {

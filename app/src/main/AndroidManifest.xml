@@ -23,9 +23,14 @@
         <activity android:name=".view.footballclub.FootballclubFromApiActivity" />
         <activity
             android:name=".view.footballmatch.FootballMatchScheduleActivity"
-            android:label="@string/title_activity_football_match_schedule"/>
+            android:label="@string/title_activity_football_match_schedule" />
         <activity android:name=".view.footballmatch.detail.FootballMatchDetailActivity" />
         <activity android:name=".view.footballclub.detail.TeamDetailActivity" />
+        <activity android:name=".view.search.SearchMatchActivity" />
+        <activity
+            android:name=".view.footballclub.detail.TeamDetailClubActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.footballclub.detail.PlayerDetailActivity"/>
     </application>
 
 </manifest>

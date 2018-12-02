@@ -9,5 +9,8 @@ class ConstantValue {
         val ID_EVENT : String = "idEvent"
         val HOME_BADGE : String = "homeBadge"
         val AWAY_BADGE : String = "awayBadge"
+        val ID : String = "id"
+        val PLAYER : String = "player"
+        val KEYWORD : String = "keyword"
     }
 }

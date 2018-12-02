@@ -12,6 +12,8 @@ class Event (
 
         var dateEvent: String? = null,
 
+        var strTime: String? = null,
+
         @SerializedName("strEvent")
         var eventMatch: String? = null,
 
@@ -78,5 +80,15 @@ class Event (
             eventDateDisplay = format.format(date)
         }
         return eventDateDisplay
+    }
+
+    fun getDisplayHour() : String? {
+        var hourTime = strTime
+        if (strTime != null) {
+            val date = SimpleDateFormat("hh:mm:ss").parse(strTime)
+            val format = SimpleDateFormat("hh:mm")
+            hourTime = format.format(date)
+        }
+        return hourTime
     }
 }

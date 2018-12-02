@@ -37,6 +37,7 @@ interface EventClickListener {
 class EventViewHolder(view: View, val listener: EventClickListener) : RecyclerView.ViewHolder(view) {
 
     private val eventTime: TextView = view.find(R.id.event_time)
+    private val eventHour: TextView = view.find(R.id.event_hour)
     private val teamHome: TextView = view.find(R.id.team_home)
     private val teamHomeScore: TextView = view.find(R.id.team_home_score)
     private val teamAway: TextView = view.find(R.id.team_away)
@@ -45,6 +46,7 @@ class EventViewHolder(view: View, val listener: EventClickListener) : RecyclerVi
 
     fun bindItem(event: Event) {
         eventTime.text = event.getDisplayDate()
+        eventHour.text = event.getDisplayHour()
         teamHome.text = event.homeTeam
         teamAway.text = event.awayTeam
 

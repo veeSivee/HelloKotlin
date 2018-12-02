@@ -47,18 +47,24 @@ class FootballMatchPresenter (private val view: FootballMatchScheduleView,
         }
     }
 
-    fun getTeamList (id: String?, strLeague: Array<String>, idLeague: Array<String>) {
-        if (data.size > 0) return
-
-        var index : Int = idLeague.indexOf(id)
-        var league = strLeague[index]
-
+    fun getTeamList (leagueName: String?) {
         GlobalScope.launch(Dispatchers.Main) {
-            val dataTeam = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeams(league)).await(),
+            val dataTeam = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeams(leagueName)).await(),
                     TeamResponse::class.java)
             data = dataTeam.teams
         }
     }
+
+    /*fun getAllTeamsByLeagueId(id: String) {
+        view.showLoading()
+        GlobalScope.launch(Dispatchers.Main) {
+            val data = gson.fromJson(apiRepository.doRequest(TheSportDBApi.getAllTeamsByLeagueId(id)).await(),
+                    TeamResponse::class.java)
+
+            view.hideLoading()
+            view.showTeamList(data.teams)
+        }
+    }*/
 
     fun getImageUrl (teamName: String?) : String? {
 

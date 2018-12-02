@@ -19,7 +19,7 @@ import org.jetbrains.anko.support.v4.swipeRefreshLayout
 import vi.learning.hellokotlin.R
 import vi.learning.hellokotlin.db.Favorite
 import vi.learning.hellokotlin.db.database
-import vi.learning.hellokotlin.view.footballclub.detail.TeamDetailActivity
+import vi.learning.hellokotlin.view.footballclub.detail.TeamDetailClubActivity
 
 /**
  * Created by taufiqotulfaidah on 11/4/18.
@@ -36,7 +36,7 @@ class FavoriteTeamsFragment : Fragment(), AnkoComponent<Context> {
         super.onActivityCreated(savedInstanceState)
 
         adapter = FavoriteTeamAdapter(favorites) {
-            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+            ctx.startActivity<TeamDetailClubActivity>("id" to "${it.teamId}")
         }
 
         listEvent.adapter = adapter

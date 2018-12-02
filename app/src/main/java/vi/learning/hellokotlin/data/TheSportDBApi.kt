@@ -7,27 +7,39 @@ import vi.learning.hellokotlin.BuildConfig
  */
 object TheSportDBApi {
 
+    private fun getUncompleteUrl() : String {
+        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}";
+    }
+
     fun getTeams(league: String?): String {
-        return getUncompleteUrl() + "/search_all_teams.php?l=" + league
+        return getUncompleteUrl() + "/search_all_teams.php?l=$league"
     }
 
     fun getNextMatchSchedule(id: String?): String {
-        return getUncompleteUrl() + "/eventsnextleague.php?id=" + id
+        return getUncompleteUrl() + "/eventsnextleague.php?id=$id"
     }
 
     fun getPastMatchSchedule(id: String?): String {
-        return getUncompleteUrl() + "/eventspastleague.php?id=" + id
+        return getUncompleteUrl() + "/eventspastleague.php?id=$id"
     }
 
     fun getEventDetail(id: String): String {
-        return getUncompleteUrl() + "/lookupevent.php?id=" + id
+        return getUncompleteUrl() + "/lookupevent.php?id=$id"
     }
 
     fun getTeamDetail(teamId: String?): String{
-        return getUncompleteUrl() + "/lookupteam.php?id=" + teamId
+        return getUncompleteUrl() + "/lookupteam.php?id=$teamId"
     }
 
-    private fun getUncompleteUrl() : String {
-        return BuildConfig.BASE_URL + "api/v1/json/${BuildConfig.TSDB_API_KEY}";
+    fun getSearchEvent(keyword: String) : String {
+        return getUncompleteUrl() + "/searchevents.php?e=$keyword"
+    }
+
+    fun getAllTeamsByLeagueId(id: String?): String {
+        return getUncompleteUrl() + "/lookup_all_teams.php?id=$id"
+    }
+
+    fun getAllPlayerByTeamId(id: String?): String {
+        return getUncompleteUrl() + "/searchplayers.php?t=$id"
     }
 }

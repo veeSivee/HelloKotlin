@@ -22,7 +22,7 @@ import vi.learning.hellokotlin.model.footballclub.Team
 import vi.learning.hellokotlin.presenter.FootballClubApiPresenter
 import vi.learning.hellokotlin.view.footballclub.FootballClubApiView
 import vi.learning.hellokotlin.view.footballclub.FootballclubApiAdapter
-import vi.learning.hellokotlin.view.footballclub.detail.TeamDetailActivity
+import vi.learning.hellokotlin.view.footballclub.detail.TeamDetailClubActivity
 
 /**
  * Created by taufiqotulfaidah on 11/4/18.
@@ -101,7 +101,7 @@ class TeamFragment : Fragment(), AnkoComponent<Context>, FootballClubApiView {
 
     private fun initAdapter() {
         adapter = FootballclubApiAdapter(teams) {
-            ctx.startActivity<TeamDetailActivity>("id" to "${it.teamId}")
+            ctx.startActivity<TeamDetailClubActivity>("id" to "${it.teamId}")
         }
         listTeam.adapter = adapter
 

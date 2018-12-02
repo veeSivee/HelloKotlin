@@ -49,6 +49,8 @@ class TeamDetailPresenterTest {
 
             presenter.getTeamDetail(league)
 
+            Thread.sleep(3000)
+
             Mockito.verify(view).showLoading()
             Mockito.verify(view).showTeamDetail(teams)
             Mockito.verify(view).hideLoading()

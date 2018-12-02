@@ -42,7 +42,8 @@ class MyDatabaseOpenHelper (ctx: Context, dbname: String, version: Int) : Manage
                 FavoriteMatch.TEAM_HOME_SCORE to TEXT,
                 FavoriteMatch.TEAM_AWAY to TEXT,
                 FavoriteMatch.TEAM_AWAY_SCORE to TEXT,
-                FavoriteMatch.MATCH_DATE to TEXT)
+                FavoriteMatch.MATCH_DATE to TEXT,
+                FavoriteMatch.MATCH_HOUR to TEXT)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
